@@ -1,0 +1,23 @@
+# Godot 4
+.godot/
+/android/
+
+# Build output
+/build/
+/export/
+*.exe
+*.pck
+*.zip
+
+# Tools & downloads (large binaries, not part of the repo)
+/tools/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Logs
+*.log
