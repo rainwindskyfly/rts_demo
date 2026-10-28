@@ -11,6 +11,26 @@ open it in Godot, press F5 — it runs.
 
 ---
 
+## Play it without installing anything
+
+A prebuilt Windows binary is committed to this repository:
+
+**[`release/RTSDemo-win64.zip`](release/RTSDemo-win64.zip)** — 36 MB, contains `RTSDemo.exe`,
+`RTSDemo.pck` and a `HOW-TO-PLAY.txt`.
+
+1. Download the zip (GitHub → *Code* → *Download ZIP*, or the raw file link).
+2. Extract it anywhere.
+3. Double-click `RTSDemo.exe`.
+
+`RTSDemo.exe` and `RTSDemo.pck` have to stay in the same folder. No Godot, no runtime,
+no extra downloads.
+
+> The raw `.exe` is 104 MB, which is over GitHub's 100 MB per-file limit for a git
+> blob — that is why the committed artifact is the compressed archive. If you want the
+> uncompressed binary, grab it from the repository's **Releases** page instead.
+
+---
+
 ## Features
 
 | | |
@@ -28,7 +48,7 @@ open it in Godot, press F5 — it runs.
 
 ---
 
-## Running it
+## Running it from source
 
 ### Option A — open in the Godot editor (recommended)
 
@@ -36,17 +56,19 @@ open it in Godot, press F5 — it runs.
 2. Clone this repo and open `project.godot` with Godot.
 3. Press **F5**.
 
-### Option B — run a prebuilt Windows binary
-
-Download `RTSDemo.exe` from the releases page and double-click it. No Godot needed.
-
-### Option C — build it yourself
+### Option B — build it yourself
 
 ```powershell
 # 1. Install the export templates once (Godot: Editor > Manage Export Templates)
 #    They must land in %APPDATA%\Godot\export_templates\4.7.2.stable\
 godot --headless --path . --import
 godot --headless --path . --export-release "Windows Desktop" "build/RTSDemo.exe"
+```
+
+To refresh the committed playable archive afterwards:
+
+```powershell
+powershell -File tools/package_release.ps1
 ```
 
 The exported game lands in `build/` as `RTSDemo.exe` + `RTSDemo.pck`.
@@ -92,10 +114,16 @@ rts_demo/
 │  ├─ ui/                   # HUD, MiniMap, DragRect
 │  └─ world/                # MapBuilder
 ├─ tests/                   # headless acceptance test + screenshot tool
+├─ release/                 # playable Windows archive (committed on purpose)
+│  ├─ RTSDemo-win64.zip     #   the build partners download
+│  └─ HOW-TO-PLAY.txt
 ├─ docs/
 │  ├─ DESIGN.md             # the game design document
-│  └─ TECH_PLAN.md          # the technical plan
-└─ tools/                   # local Godot install (git-ignored)
+│  ├─ TECH_PLAN.md          # the technical plan
+│  └─ screenshot.png
+└─ tools/                   # local Godot install (git-ignored, except the
+   │                        #   packaging script)
+   └─ package_release.ps1
 ```
 
 ### Architecture notes

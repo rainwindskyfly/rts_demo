@@ -9,8 +9,16 @@
 *.pck
 *.zip
 
+# The packaged Windows build is committed on purpose: it lets a partner clone
+# the repo and play immediately, without installing Godot. The raw .exe is
+# 104 MB and exceeds GitHub's 100 MB per-file limit, so the compressed
+# archive is what gets tracked.
+!/release/RTSDemo-win64.zip
+
 # Tools & downloads (large binaries, not part of the repo)
-/tools/
+/tools/*
+# ...except the release packaging script, which is worth keeping.
+!/tools/package_release.ps1
 
 # IDE / OS
 .vscode/

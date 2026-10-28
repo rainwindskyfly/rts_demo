@@ -1,0 +1,50 @@
+RTS Demo — Windows build
+========================
+
+HOW TO PLAY
+-----------
+1. Extract this zip anywhere (e.g. Desktop).
+2. Double-click RTSDemo.exe.
+3. That's it — no Godot, no other files needed.
+
+RTSDemo.exe and RTSDemo.pck must stay in the same folder.
+
+CONTROLS
+--------
+Left click        select one unit
+Left drag         box-select your own units
+Right click       move / attack / harvest (depends on what you click)
+W A S D / arrows  pan the camera   (Shift = faster)
+Mouse wheel       zoom
+S                 stop the selected units
+H                 jump to your base
+Space             jump to the latest fight
+Ctrl+A            select all combat units
+Ctrl+1..9         assign a control group
+1..9              recall a control group
+B                 toggle the build panel
+1..5              pick a build-panel entry
+Esc               cancel / pause menu
+
+HOW TO WIN
+----------
+Destroy the enemy HQ (the big blue/red square). You also win on points when
+the 20 minute timer runs out.
+
+Your starting workers mine automatically. Right-click an ore field to send
+them somewhere else, or right-click your HQ to unload them.
+
+BUILD
+-----
+Barracks  120  produces Infantry and Tanks
+Refinery  100  must be placed on an ore field; workers unload here
+Infantry   50  cheap melee
+Tank      150  armoured, long range
+Worker     40  mines ore
+
+Make a Barracks first, then mass infantry, then push.
+
+ABOUT
+-----
+Built with Godot 4.7.2. All art is generated in code — the game ships with
+zero image or audio files. Source: https://github.com/rainwindskyfly/rts_demo
