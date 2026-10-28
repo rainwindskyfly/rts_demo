@@ -71,8 +71,18 @@ finally {
 }
 
 $sizeMb = [math]::Round((Get-Item $zipPath).Length / 1MB, 2)
+
+# Publish a checksum next to the archive so that anyone who downloaded it can
+# confirm the bytes are the ones that were built and committed. The format is
+# the one `sha256sum -c` expects, so it works from Git Bash as well.
+$hash = (Get-FileHash $zipPath -Algorithm SHA256).Hash.ToLower()
+$sumPath = Join-Path $releaseDir 'RTSDemo-win64.zip.sha256'
+[System.IO.File]::WriteAllText($sumPath, "$hash  RTSDemo-win64.zip`n")
+Write-Host "Checksum written to $sumPath"
+
 Write-Host ""
 Write-Host "Packaged $zipPath ($sizeMb MB)"
+Write-Host "  sha256 $hash"
 if ($sizeMb -ge 100) {
 	Write-Warning "Archive exceeds GitHub's 100 MB per-file limit for a git blob."
 }

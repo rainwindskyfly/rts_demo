@@ -17,8 +17,9 @@
 
 # Tools & downloads (large binaries, not part of the repo)
 /tools/*
-# ...except the release packaging script, which is worth keeping.
+# ...except the release packaging and review scripts, which are worth keeping.
 !/tools/package_release.ps1
+!/tools/check_pr.ps1
 
 # IDE / OS
 .vscode/
