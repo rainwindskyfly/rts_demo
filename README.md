@@ -25,6 +25,14 @@ A prebuilt Windows binary is committed to this repository:
 `RTSDemo.exe` and `RTSDemo.pck` have to stay in the same folder. No Godot, no runtime,
 no extra downloads.
 
+You can confirm the download is intact by comparing its hash with the one published
+next to it:
+
+```powershell
+Get-FileHash .\RTSDemo-win64.zip -Algorithm SHA256
+# compare with release/RTSDemo-win64.zip.sha256
+```
+
 > The raw `.exe` is 104 MB, which is over GitHub's 100 MB per-file limit for a git
 > blob — that is why the committed artifact is the compressed archive. If you want the
 > uncompressed binary, grab it from the repository's **Releases** page instead.
@@ -171,6 +179,29 @@ There is also a screenshot helper used for the image above:
 ```powershell
 godot --path . res://tests/Screenshot.tscn --fixed-fps 60 --resolution 1280x720
 ```
+
+---
+
+## Contributing and reviewing pull requests
+
+This repository is public, so anyone can open a pull request against it. They
+cannot push to `main` — untrusted code only ever enters when a pull request is
+merged, which is your decision.
+
+Because this is a Godot project that also ships a runnable binary, two kinds of
+change deserve extra care: **GDScript** (Godot runs it as soon as you open the
+project) and **`release/*.zip`** (that *is* the file partners download and run).
+
+A helper classifies every changed file by risk and verifies the published
+checksum before you merge:
+
+```powershell
+powershell -File tools/check_pr.ps1 -Base origin/main -Head <pr-branch>
+```
+
+It exits with code `2` when executable or distributable files changed. See
+[`SECURITY.md`](SECURITY.md) for the full policy and the repository hardening
+checklist.
 
 ---
 
